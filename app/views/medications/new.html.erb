@@ -1,0 +1,16 @@
+<%= render "layouts/navbar" %>
+
+<div class="container">
+
+<%= form_for @medication do |f| %>
+
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :dosage %><br />
+    <%= f.text_area :dosage %>
+  </p>
+  <p><%= f.submit class: "btn btn-default" %></p>
+<% end %>

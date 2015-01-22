@@ -1,0 +1,5 @@
+<%= render partial: 'layouts/profile_nav', object: @user %>
+<div class="container">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h2>Privacy Settings for <strong><% if @condition.page.presence %><%= link_to @condition.page.name, condition_posts_path(@condition) %><%= @condition.page.name %><% else %><%= link_to @condition.name, condition_posts_path(@condition) %></strong><% end %>

@@ -1,0 +1,121 @@
+<div class="container">
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<%= avatar_profile_link @user, {height: 40}, class: "pull-left media-object", style: "margin: 0px;  padding: 0px; padding-right: 10px;" %>
+			<ul class="nav pull-left">
+				<li>
+					<h3 style="margin: 6px;">
+						<%= @user.full_name %>
+					</h3>
+				</li>
+			</ul>
+			
+			<ul class="nav nav-pills pull-right">
+				<li>
+					<%= link_to "Profile", user_path(@user) %>
+				</li>
+				<li>
+					<%= link_to "Apps", user_apps_path(@user) %>
+				</li>
+				<li class="active">
+					<%= link_to "Goals", user_goals_path(@user) %>
+				</li>
+				<li>
+					<%= link_to "Conditions", user_conditions_path(@user) %>
+				</li>
+			</ul>
+		</div>
+	</div>	
+</div>
+
+<div class="container">
+	<div class="panel panel-primary">
+		<div class="panel-heading">
+			<h2><strong>My Goals</strong><span class="pull-right"></span>
+				<button class="btn btn-default pull-right" data-toggle="modal" data-target="#myModal">
+					+ New Goal
+				</button>
+			</h2>
+		</div>
+
+		<div class="panel-body">
+			<!-- Modal -->
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h3 class="modal-title" id="myModalLabel">New Goal</h3>
+						</div>
+						<%= form_for [@user, Goal.new] do |f| %>
+						<div class="modal-body">
+							<div>
+								<%= f.label :goal_name %><br />
+								<%= f.text_field :name, autofocus: true, class:"form-control" %>
+							</div>
+							<div>
+								<strong>How will you track?</strong><br>
+								<span><%= f.check_box :use_photo %><%= f.label :photos %></span><br>
+								<span><%= f.check_box :use_number %><%= f.label :numbers_and_chart %></span><br>
+								<span><%= f.check_box :use_words %><%= f.label :words %></span>
+							</div>
+							<div>
+								<%= f.label "Number value (lbs, calories, miles, etc)" %><br />
+								<%= f.text_field :number_name, class:"form-control" %>
+							</div>
+							<div>
+								<%= f.label "Number goal" %><br />
+								<%= f.text_field :number_goal, class:"form-control" %>
+							</div>
+							<%= f.hidden_field :completed, :value => false %>
+							<div>
+								<span><%= f.check_box :use_goal_date %><%= f.label :use_goal_date %></span><br>
+								<%= f.date_select :goal_date, class:"form-control" %>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							<%= f.submit "Save New Goal", class: "btn btn-primary" %>
+						</div>
+						<% end %>
+					</div>
+				</div>
+			</div>
+
+
+			<% for goal in @unfinished_goals %>
+				<div class="col-sm-12 panel panel-default" style="margin: 0px;">
+					<h3>
+						<i class="fa fa-star fa-x"></i> <strong><%= link_to goal.name, goal %>
+						<%= link_to "View", goal_path(goal), class: "btn btn-primary pull-right" %></strong>
+					</h3>
+					<p>
+						<strong>Goal: </strong><%= goal.number_goal %> <%= goal.number_name %><br>
+						<strong>Goal Date: </strong><%= goal.goal_date.strftime("%B %d, %Y") %><br>
+						<strong>Goal Started: </strong><%= goal.created_at.strftime("%B %d, %Y") %>
+					</p>
+					<p>Last Update: </p>
+				</div>
+			<% end %>
+		</div>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h2><strong>Past Goals</strong><span class="pull-right"></span>
+				
+			</h2>
+		</div>
+
+		<div class="panel-body">
+			<% for goal in @completed_goals %>
+				<div class="col-sm-4 -default" style="margin: 0px;">
+					<h3><center>
+						<i class="fa fa-trophy fa-3x"></i><br><strong><%= link_to goal.name, goal %><br>
+						</center>
+					</h3>
+					
+				</div>
+			<% end %>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,52 @@
+<body style="background: #eee; background-image: url(<%= asset_path 'Blueys.jpg' %>); background-size: 100% 100%;">
+	<div class="container">
+		<div class="col-md-8 col-md-offset-2">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h1>Update Profile</h1>
+				</div>
+				<div class="panel-body">
+					<%= bootstrap_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+
+					<%= devise_error_messages! %>
+
+					<h3>Personal Information</h3>
+					<%= f.collection_select :role, User::ROLES, :to_s, :humanize %>
+					<hr>
+					<%= f.text_field :first_name, autofocus: true %>
+					<%= f.text_field :last_name %>
+					<%= f.email_field :email %>
+							
+					<%= f.date_select :date_of_birth, start_year: 1900 %>
+					<%= f.select :gender, gender: [:Male, :Female] %>
+					<%= f.select :doner?, doner: [:Yes, :No] %>
+					<%= f.select :bloodtype, bloodtype: ["Unknown", "O+", "O-", "A+", "A-", "B+", "B-", "AB+", "AB-"] %>
+					<%= f.text_area :address %>
+					<%= f.text_area :bio %>
+
+					<%= f.file_field :avatar, as: :file, class: "form-control" %>
+					<% if f.object.avatar? %>
+					<%= avatar_profile_link f.object, {width: 130}  %>
+					<br>
+					<% end %>
+
+					<% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+					<div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+					<% end %>
+					<br />
+
+					<i>New Password (leave blank if you don't want to change it)</i><br />
+					<%= f.password_field :password, autocomplete: "off" %>
+
+					<%= f.password_field :password_confirmation, autocomplete: "off"%>
+					<hr>
+					<i>Enter current password(we need your current password to confirm your changes)</i><br />
+					<%= f.password_field :current_password, autocomplete: "off" %>
+
+					<p><%= f.submit "Update", class: "btn btn-lg btn-primary btn-block" %></p>
+					<% end %>
+
+					<%= link_to "Cancel", :back, class: "btn-block btn btn-default" %>
+					<center>
+						<br><%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: " text-danger" %>
+					</center>

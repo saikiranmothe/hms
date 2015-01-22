@@ -1,0 +1,24 @@
+<div class="container">
+	<div class="panel panel-default">
+		<div class="panel-body">
+
+<h1>All Medications</h1>
+
+    <% @ko_medications.each do |ko_medication| %>
+    <div class="row">
+      <div class="col-md-1">
+        <%= image_tag ko_medication.imageurl, width: 55 %>
+      </div>
+      <div class="col-md-11">
+        <h4><%= ko_medication.name %></h4>
+        <p><%= ko_medication.description %></p>
+        <td><%= link_to 'Show', ko_medication %></td>
+        <td><%= link_to 'Edit', edit_ko_medication_path(ko_medication) %></td>
+        <td><%= link_to 'Destroy', ko_medication, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </div>
+    </div>
+    <% end %>
+
+<br>
+
+<%= link_to 'New Ko medication', new_ko_medication_path %>

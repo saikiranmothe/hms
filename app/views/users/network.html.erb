@@ -1,0 +1,85 @@
+<div class="container">
+	<div class="panel panel-default">
+		<div class="panel-body">
+      
+			<%= avatar_profile_link @user, {height: 40}, class: "pull-left media-object", style: "margin: 0px;  padding: 0px; padding-right: 10px;" %>
+			<ul class="nav pull-left">
+				<li>
+					<h3 style="margin: 6px;">
+						<%= @user.full_name %>
+					</h3>
+				</li>
+			</ul>
+			
+			<ul class="nav nav-pills pull-right">
+				<li>
+					<%= link_to "Profile", user_path(@user) %>
+				</li>
+				<li class="active">
+					<%= link_to "Network", user_network_path(@user) %>
+				</li>
+				<li class="">
+					<%= link_to "Data", user_apps_path(@user) %>
+				</li>
+				<li>
+					<%= link_to "Goals", user_goals_path(@user) %>
+				</li>
+				<li>
+					<%= link_to "Conditions", user_conditions_path(@user) %>
+				</li>
+			</ul>
+		</div>
+	</div>	
+</div>
+
+<div class="container"><div class="">
+	<div class="panel panel-default">
+		<div class="panel-body">
+      <h2>
+        <i style="text-shadow: 3px 2px 0px #fff, 5px 4px 0px rgba(0, 0, 0, 0.15);" class="text-primary fa fa-group fa-x"></i> Network
+      </h2><hr>
+      <% if @user.followed_users.any? %>
+			<% @user.followed_users.each do |f| %>
+      <h4><%= gravatar_for f %> <%= f.full_name %></h4>
+			<p>
+				<%= link_to "Profile", f %> | 
+				<%= link_to "Edit Relationship", current_user.find_handshake(f) %> | 
+				<%= link_to "Message", f %>
+			</p>
+			<% end %>
+      <% else %><p class="lead">
+      Do you want to share your health information with family members, careproviders, or specialists?<br> <%= link_to "Click here to find them.", users_path %>
+      </p>
+      <% end %>
+		</div>
+	</div>
+  <div class="panel panel-default">
+		<div class="panel-body">
+      <h2>
+        <i style="text-shadow: 3px 2px 0px #fff, 5px 4px 0px rgba(0, 0, 0, 0.15);" class="text-primary fa fa-lock fa-x"></i> Permissions
+      </h2>
+      <hr>
+      <%= form_for [@user, Permission.new] do |f| %>
+        <%= f.hidden_field :user_id, value: @user.id %>
+        <div class="form-group col-md-3">
+          <%= f.collection_select :permissible_user_id, @user.followed_users, :id, :full_name, {prompt: "Select a person to share to"}, {class: "form-control col-lg-2"} %>
+        </div>
+        <div class="form-group col-md-1">
+          can see
+        </div>
+        <div class="form-group form-horizontal col-md-3">
+          <%= f.collection_select :condition_id, @user.conditions, :id, :page_name, {prompt: "Select something to share"}, {class: "form-control col-lg-2"} %>
+        </div>
+        <%= f.submit class: "form-conol btn btn-primary" %>
+      <% end %>
+      <br>
+      <% @user.permissions.each do |f| %>
+      <div class="well">
+        <i class="fa fa-share"></i> 
+          <%= link_to f.permissible_user.full_name, f.permissible_user %> can see <%= link_to  Condition.find(f.condition_id).page.name, condition_posts_path(Condition.find(f.condition_id)) %> 
+        <%= link_to 'Remove', f, class: "btn-sm btn btn-default pull-right", method: :delete, data: { confirm: 'Are you sure?' } %>
+        </div>
+      <% end %>
+		</div>
+	</div>
+</div>

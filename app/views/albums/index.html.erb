@@ -1,0 +1,56 @@
+<%= render partial: 'layouts/profile_nav', object: @user %>
+<div class="container">
+	<div class="panel panel-default">
+		<div class="panel-body">
+	<h2>
+		<strong>File Folders</strong>
+		<button class="btn btn-default pull-right" data-toggle="modal" data-target="#myModal">
+			New Folder
+		</button>
+	</h2>
+	<hr>
+
+
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h3 class="modal-title" id="myModalLabel">New Folder</h3>
+				</div>
+				<%= form_for Album.new do |f| %>
+				<div class="modal-body">
+					<div>
+						<%= f.label :title %><br />
+						<%= f.text_field :title, autofocus: true, class:"form-control" %>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<%= f.submit "Save Folder", class: "btn btn-primary" %>
+				</div>
+				<% end %>
+			</div>
+		</div>
+	</div>
+
+
+	<div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"><div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+	<h3>New Album</h3>
+</div><div class="modal-body">sadsadas</div></div>
+<% @albums.each do |album| %>
+  <div class="col-md-4">
+    <div class="thumbnail">
+    	<h3><%= album.title %></h3>
+      <%= link_to album_thumbnail(album), album_pictures_path(album) %><br />
+      <%= link_to "View Folder", album_pictures_path(album) %>
+      <% if can_edit_album?(album) %>
+        | <%= link_to "Edit", edit_album_path(album) %>
+        | <%= link_to "Delete", album_path(album), method: :delete, data: { confirm: "Are you sure?" } %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+

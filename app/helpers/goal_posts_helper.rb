@@ -1,0 +1,2 @@
+module GoalPostsHelper
+end

@@ -1,0 +1,26 @@
+<div class="container">
+<div class="col-md-6 col-md-offset-3">
+  <div class="panel panel-default">
+    <div class="panel-body">
+  <h2>Sign Up For A New Account</h2>
+  <blockquote>
+    <p>
+      Please enter the following information to signup for a new account:
+    </p>
+  </blockquote>
+
+    <%= bootstrap_form_for(resource, :as => resource_name, :url => registration_path(resource_name), html: { class: 'form-vertical' }) do |f| %>
+      <%= devise_error_messages! %>
+    <%= f.text_field :first_name, autocomplete: "off", class: "form-control" %>
+    <%= f.text_field :last_name, class: "form-control" %>
+      <%= f.text_field :email %>
+      <%= f.date_select :date_of_birth, start_year: 1900 %>
+      <%= f.password_field :password %>
+      <%= f.password_field :password_confirmation %>
+      <br>
+        <%= f.submit "Sign up", class: 'btn btn-lg btn-block btn-primary' %><br />
+      </div>
+    <% end %>
+</div>
+</div>
+

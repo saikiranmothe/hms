@@ -1,0 +1,145 @@
+<div class="panel-group" id="accordion">
+	<div class="panel panel-primary">
+		<div class="panel-heading">
+			<h2 class="panel-">
+				<i class="fa fa-user"></i> Basic Information
+				<small>
+					<%= link_to "Update Profile",edit_registration_path(@user),  class: "btn btn-default pull-right" %>
+				</small>
+			</h2>
+		</div>
+		<div id=" One" class="panel-    in">
+			<div class="panel-body">
+				<% if @user.date_of_birth.presence %>
+				<strong>Birthday</strong>
+				<%= @user.date_of_birth.strftime("%B %d, %Y") %> (Age <%= @user.date_of_birth_age %>)
+				<% end %><br>
+				<% if @user.gender.presence %>
+				<strong>Gender</strong>
+				<%= @user.gender %>
+				<% end %><br>
+				<% if @user.date_of_birth.presence %>
+				<strong>Organ Donor?</strong>
+				<%= @user.doner %>
+				<% end %><br>
+				<% if @user.bloodtype.presence %>
+				<strong>Bloodtype</strong>
+				<%= @user.bloodtype %><br>
+				<% end %>
+				<% if @user.address.presence %>
+				<strong>Address</strong>
+				<%= @user.address %><br>
+				<% end %>
+				<% if @user.bio.presence %>
+				<strong>Bio</strong>
+				<%= @user.bio %>
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="panel  panel-primary">
+	<div class="panel-heading">
+		<h2 class="panel-"><i class="fa fa-medkit"></i> Medical Information</h2>
+	</div>
+	<div id=" Two" class="panel-    out">
+	<div class="panel-body">
+		<h3 class="text-">Allergies 
+			<%= link_to "Edit", user_allergies_path(@user), class: "pull- btn-sm btn btn-default" %> 
+		</h3>
+		<% if @user.allergies.any? %>
+		<% for allergy in @user.allergies %>
+		<tr>
+			<td><%= allergy.name %></td>
+		</tr>
+		<% end %>
+		<% end %>
+		
+		<% if @user.medications.any? %>
+			<h3 class="text-">Medications
+				<%= link_to "Edit", user_medications_path(@user), class: "pull- btn-sm btn btn-default" %> 
+			</h3>
+			<% for medication in @user.medications %>
+				<tr>
+					<td><%= link_to medication.name, medication %></td>
+					<td><%= medication.dosage %></td>
+				</tr>
+			<% end %>
+		<% end %>
+
+
+	</div>
+</div>
+</div>
+
+
+<div class="panel  panel-primary">
+	<div class="panel-heading">
+		<h2 class="panel-"><i class="fa fa-star"></i> Goals
+			<small>
+				<%= link_to "View Goals", user_conditions_path(@user), class: "btn btn-default pull-right" %>
+			</small>
+		</h2>
+	</div>
+	<div id=" Three" class="panel-    out">
+	<div class="panel-body">
+		<% for goal in @unfinished_goals %>
+				<div class="col-sm-12 panel  primary" style="margin: 0px;">
+					<h3>
+						<i class="fa fa-star fa-x"></i> <strong><%= link_to goal.name, goal %>
+						<%= link_to "View", goal_path(goal), class: "btn btn-default pull-right" %></strong>
+					</h3>
+					<p>
+						<strong>Goal: </strong><%= goal.number_goal %> <%= goal.number_name %><br>
+						<strong>Goal Date: </strong><%= goal.goal_date.strftime("%B %d, %Y") %><br>
+						<strong>Goal Started: </strong><%= goal.created_at.strftime("%B %d, %Y") %>
+					</p>
+					<p>Last Update: </p>
+				</div>
+			<% end %>
+	</div>
+</div>
+</div>
+
+<div class="panel  panel-primary">
+	<div class="panel-heading">
+		<h2 class="panel-"><i class="fa fa-stethoscope"></i> Conditions
+			<small>
+				<%= link_to "Update Conditions", user_conditions_path(@user), class: "btn btn-default pull-right" %>
+			</small>
+		</h2>
+	</div>
+	<div id=" Four" class="panel-    out">
+	<div class="panel-body">
+		<% for condition in @user.conditions %>
+			<div class="row">
+				<div class="col-sm-12">
+					<h4>
+						<strong><%= condition.name %></strong>
+						<%= link_to "View full history", condition_posts_path(condition), class: "btn btn-primary pull-right" %>
+					</h4>
+					<p><%= condition.created_at.strftime("%B %d, %Y") %> - Present</p><br />
+				</div>
+			</div>
+			<hr>
+		<% end %>
+	</div>
+</div>
+</div>
+
+<div class="panel  panel-primary">
+	<div class="panel-heading">
+		<h2 class="panel-"><i class="fa fa-bolt"></i> Fitness
+		
+		</h2>
+	</div>
+	<div >
+	<div class="panel-body">
+		<h3>Weight</h3>
+		<%= line_chart @user.weights.group(:created_at).maximum(:amount) %>
+		<h3>Height</h3>
+		<%= line_chart @user.heights.group(:created_at).maximum(:amount) %>
+	</div>
+</div>
+</div>

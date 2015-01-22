@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  other_id: 1
+  relationship_name: MyString
+  relationship_type: MyString
+
+two:
+  user_id: 1
+  other_id: 1
+  relationship_name: MyString
+  relationship_type: MyString

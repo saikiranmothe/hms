@@ -1,0 +1,101 @@
+<div class="container">
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<%= avatar_profile_link @user, {height: 40}, class: "pull-left media-object", style: "margin: 0px;  padding: 0px; padding-right: 10px;" %>
+			<ul class="nav pull-left">
+				<li>
+					<h3 style="margin: 6px;">
+						<%= @user.full_name %>
+					</h3>
+				</li>
+			</ul>
+			
+			<ul class="nav nav-pills pull-right">
+				<li>
+					<%= link_to "Profile", user_path(@user) %>
+				</li>
+				<li>
+					<%= link_to "Apps", user_apps_path(@user) %>
+				</li>
+				<li>
+					<%= link_to "Goals", user_goals_path(@user) %>
+				</li>
+				<li class="active">
+					<%= link_to "Conditions", user_conditions_path(@user) %>
+				</li>
+			</ul>
+		</div>
+	</div>	
+</div>
+<div class="container">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h2><strong>Current Conditions</strong><span class="pull-right"></span>
+				<a class="btn btn-default pull-right" data-toggle="modal" data-target="#myModal">
+					Add Condition
+				</a>
+			</h2>
+		</div>
+		<div class="panel-body">
+			<!-- Modal -->
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h3 class="modal-title" id="myModalLabel">New Condition</h3>
+						</div>
+						<%= form_for Condition.new do |f| %>
+						<div class="modal-body">
+							<div>
+								<%= f.label :name %><br />
+								<%= f.text_field :name, autofocus: true, class:"form-control" %>
+							</div>
+							<div>
+								<%= f.label :description %><br />
+								<%= f.text_area :description, class:"form-control" %>
+							</div>
+							<div>
+								<%= f.label :page_id %><br />
+								<%= f.text_area :page_id, class:"form-control" %>
+								<%= f.collection_select( :page_id, Page.all, :id, :name, include_blank: "None") %><br />
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							<%= f.submit "Save New Condition", class: "btn btn-primary" %>
+						</div>
+						<% end %>
+					</div>
+				</div>
+			</div>
+
+			<% for condition in @conditions %>
+			<div class="row">
+				<div class="col-sm-12">
+					<h4>
+						<strong>
+						<% if condition.page.presence %>
+							<%= link_to condition.page.name, condition_posts_path(condition) %>
+						<% else %>
+							<%= link_to condition.name, condition_posts_path(condition) %>
+						<% end %>
+						</strong>
+						<%= link_to "View", condition_posts_path(condition), class: "btn btn-primary pull-right" %>
+					</h4>
+					<p><%= condition.created_at.strftime("%B %d, %Y") %> - Present</p><br />
+					<%=  %>
+				</div>
+			</div>
+			<hr>
+			<% end %>
+		</div>
+	</div>
+
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<h1>Past Conditions</h1>
+			<hr>
+		</div>
+	</div>
+</div>

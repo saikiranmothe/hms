@@ -1,0 +1,13 @@
+== README
+
+Personal Health Record Data management System
+
+Personal Health Records lets you easily catalog and share information about your health. 
+
+* Store information in a secure, cloud server
+
+* Discrete privacy controls for who sees which parts of your health record
+
+* Easily update your family members or doctors about your health information
+
+It is a Ruby on Rails web-app, and the goal is to provide an open API for other developers to utilize Tabby as a hub for connecting personal health data, from running miletimes to genomic analysis. 

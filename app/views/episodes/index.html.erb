@@ -1,0 +1,18 @@
+<%= render partial: 'layouts/profile_nav', object: @user %>
+<div class="container">
+	<div class="panel panel-default">
+		<div class="panel-body">
+	<h2>
+		<strong>Episodes</strong>
+		<%= link_to new_user_episode_path, class: "btn pull-right btn-default btn-lg" do %>
+			<span class="glyphicon glyphicon-plus"></span> New Episode
+		<% end %>
+	</h2>
+	<hr>
+
+	<% @episodes.each do |episode| %>
+  <div class="col-md-4">
+    	<h3><%= episode.name %></h3>
+      <%= link_to "View", episode_posts_path(episode), class: "btn btn-default" %>
+  </div>
+<% end %>

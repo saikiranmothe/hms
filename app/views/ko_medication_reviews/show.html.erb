@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @ko_medication_review.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @ko_medication_review.description %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @ko_medication_review.user_id %>
+</p>
+
+<p>
+  <strong>Is anonymous:</strong>
+  <%= @ko_medication_review.is_anonymous %>
+</p>
+
+<p>
+  <strong>Rating:</strong>
+  <%= @ko_medication_review.rating %>
+</p>
+
+<p>
+  <strong>Condition:</strong>
+  <%= @ko_medication_review.condition_id %>
+</p>
+
+<%= link_to 'Edit', edit_ko_medication_review_path(@ko_medication_review) %> |
+<%= link_to 'Back', ko_medication_reviews_path %>

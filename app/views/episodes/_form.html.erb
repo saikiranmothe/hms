@@ -1,0 +1,21 @@
+
+<div class="col-md-6 col-md-offset-3">
+	<h2>New Issue</h2>
+	<blockquote>
+		<p>
+			You can invite people to collaborate on your health issue and contribute to your success!
+		</p>
+	</blockquote>
+<%= form_for(Episode.new) do |f| %>
+ 
+  <div class="">
+  	<i>Examples: Broken arm, common cold, diarrhea</i>
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
+  <br>
+  <div class="form-actions">
+    <%= f.button :submit, class: "btn btn-lg btn-default" do %>Add Issue
+    <% end %>
+  </div>
+<% end %>
+</div>

@@ -1,0 +1,2 @@
+module HandshakesHelper
+end

@@ -1,0 +1,48 @@
+<div class="navbar navbar-fixed-top">
+	<div class="navbar-inner">
+		<div class="container">
+			<%= image_tag "TabbyLogo.png", size: "54x38", style: "" %>
+			<ul class="nav">
+				<li><%= link_to "All Statuses", current_user %></li>
+			</ul>
+			<ul class="nav pull-right">
+				<li><%= link_to "Home", root_path %></a></li>
+				<% if user_signed_in? %>
+				<li class=""><%= link_to "Profile", current_user %></li>
+				<li class=""><%= link_to "Community", users_path %></li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" style="outline: none"data-toggle="dropdown">
+						<span style="padding-left: 5px; padding-top: 15px;"><i class="fa fa-gear"></i></span> <b class="caret"></b>
+					</a>
+					<ul class="dropdown-menu">
+						<li>
+							<%= link_to "View Profile", current_user %>
+						</li>
+						<li><%= link_to 'Friends', friendships_path %></li>
+						<li>
+							<%= link_to "Edit Profile", edit_registration_path(current_user) %>
+						</li>  
+						<li class="divider"></li>
+						<li>
+							<%= link_to "Sign out", logout_path, :method => :delete %>
+						</li>        
+						<% else %>
+						<%= link_to "Sign Up!", new_user_registration_path, class: "btn btn-lg btn-default" %>
+				<% end %>
+						<li><%= link_to "Sign In", new_user_session_path %></li> 
+						<% end %>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="container">
+	<hr>
+	<% flash.each do |type, message| %>
+	<div class="alert <%= flash_class type %>">
+		<button class="close" data-dismiss="alert">×</button>
+		<%= message %>
+	</div>
+	<% end %>
+	

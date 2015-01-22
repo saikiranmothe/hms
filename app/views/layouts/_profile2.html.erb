@@ -1,0 +1,117 @@
+
+<div class="row">
+	<div class="col-sm-3">
+		<div class="panel panel-default">
+			<div class="panel-body">
+        <% if @user.date_of_birth.presence %><strong>Birthday</strong> 
+        <%= current_user.date_of_birth.strftime("%B %d, %Y") %> (age <%= (Date.today - current_user.date_of_birth).to_i / 365 %>)<br><% end %>
+        <% if @user.gender.presence %><strong>Gender</strong> <%= current_user.gender %><br><% end %>
+       <% if @user.bloodtype.presence %> <strong>Bloodtype</strong> <%= current_user.bloodtype %><br><% end %>
+        <%= link_to edit_user_registration_path(current_user), class: "btn btn-block btn-sm btn-default" do %><i class="fa fa-gear"></i> Edit Info<% end %>
+		  </div>
+    </div>
+		<div class="panel panel-default panel-body">
+			<h4 class="">Medical Conditions</h4>
+
+			<% for condition in @user.conditions %>
+			<div class="row">
+				<div class="col-md-11 col-md-offset-">
+					<p>
+						<% if condition.page.presence %>
+            <%= link_to condition.page.name, condition_posts_path(condition), class: " btn-lg" %>
+						<% else %>
+						<%= link_to condition.name, condition_posts_path(condition), class: "btn btn-default" %>
+						<% end %>
+					</p>
+				</div>
+			</div>
+			<% end %>
+
+			<h4 class="">Allergies &amp; Reactions</h4>
+
+			<% for allergy in @user.allergies %>
+			<div class="row">
+				<div class="col-md-11 col-md-offset-1">
+					<p>
+						<%= link_to allergy.name, allergy, class: "btn btn-default" %>
+					</p>
+				</div>
+			</div>
+			<% end %>
+
+			<h4 class="">Medications</h4>
+
+			<% for allergy in @user.medications %>
+			<div class="row">
+				<div class="col-md-11 col-md-offset-1">
+					<p>
+						<%= link_to allergy.name, allergy, class: "btn btn-default" %>
+					</p>
+				</div>
+			</div>
+			<% end %>
+		</div>
+		<div class="panel panel-default panel-body">
+
+			<h4 class="">Current Goals</h4>
+
+			<% for goal in @user.goals.get_unfinished %>
+			<div class="row">
+				<div class="col-md-11 col-md-offset-1">
+					<p>
+						<%= link_to goal.name, goal, class: "btn btn-success" %>
+					</p>
+				</div>
+			</div>
+			<% end %>
+
+		</div>
+	</div>
+	<div class="col-sm-9">
+    <% if @user.medications.count > 133 %>
+		<div class="alert alert-dismissable alert-info">
+			<button type="button" class="close" data-dismiss="alert">×</button>
+			
+			<h4>Reminder</h4>
+			<div class="row">
+				<div class="col-sm-10">
+					<p>Did you take your Miralax tonight? Tonight would be night 4 in a row. </p>
+				</div><div class="col-sm-2">
+					<%= link_to "Confirm", current_user, class: "btn-block pull-right btn btn-primary" %>
+				</div>
+			</div>
+		</div>
+    <% end %>
+		<div class="panel panel-default">
+			<div class="panel-body">
+        <% if @conditions.count >100 %>
+				<h2><i class="fa fa-heart text-danger fa-x"></i> Medical Journal</h2><hr>
+				<% @conditions.each do |f| %>
+					<% f.posts.each do |postX| %>
+						<div class="row">
+							<div class="col-md-9">
+                <%= postX.created_at.strftime("%B %d, %Y") %> | <%= time_ago_in_words(postX.created_at) %> ago<br>
+								<h4><% if postX.title? %><%= postX.title %><br /><% end %>
+								<% if postX.description? %><%= postX.description %><% end %> for 
+								<%= link_to condition_posts_path(postX.condition), class: "" do %>
+                <%= postX.condition.page.name %>
+                <% end %>
+							</div>
+						</div>
+						<hr>
+					<% end %>
+				<% end %>
+        <% else %>
+        <h2>Welcome to PHR SYSTEM!</h2>
+              <p class="lead">This is your profile page, where you will be able to see all of your medical updates and history of your health data.<br><br>
+                Here are a couple of things you can do to get started:<br>
+                <ol class="lead">
+                  <li>Add <%= link_to "conditions or issues", user_conditions_path(@user) %> to your profile</li>
+                  <li>Add <%= link_to "health goals", user_goals_path(@user) %></li>
+              </ol>
+              </p>
+        <% end %>
+			</div>
+		</div>
+	</div>
+</div>

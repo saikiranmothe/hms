@@ -1,0 +1,52 @@
+<div class="container">
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-md-4 col-xs-12">
+					<ul class="nav pull-left">
+						<li>
+							<h3 style="margin: 6px;">
+                <%= gravatar_for @user %>
+								<%= @user.full_name %>
+							</h3>
+						</li>
+					</ul>
+				</div>
+				<div class="col-md-8">
+					<ul class="nav nav-pills pull-right">
+						<li class="active">
+							<%= link_to "Profile", user_path(@user) %>
+						</li>
+						<li>
+							<%= link_to "Network", user_network_path(@user) %>
+						</li>
+						<li>
+							<%= link_to "Data", user_apps_path(@user) %>
+						</li>
+						<li>
+							<%= link_to "Goals", user_goals_path(@user) %>
+						</li>
+						<li>
+							<%= link_to "Conditions", user_conditions_path(@user) %>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>	
+</div>
+
+<div class="container">
+	<!-- Tab panes -->
+		<% if current_user.following?(@user) %>
+		<div class="panel panel-default panel-body" id="home">
+				<%= @user.full_name %> is connected to you. <%= link_to "Modify your handshake.", current_user.find_handshake(@user) %><p>Please note, the ability to view information from users in your network is a work in progress. Currently you may modify your handshake to choose what informaiton of yours <%= @user.full_name %> will be able to see once this feature is fully developed. </div>
+			<% end %>
+			<% if current_user?(@user) %>
+				<%= render "layouts/profile2" %>
+			<% end %>
+		</div>
+		
+	</div>
+	
+</div>

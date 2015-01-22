@@ -1,0 +1,179 @@
+<h3>Community</h3>
+<table class="table">
+	<tr>
+		<td>
+			<%= link_to @user, class: "btn btn-block btn-default" do %>
+			<span class="glyphicon glyphicon-user"></span><br>Me
+			<% end %> 
+		</td>
+		<td>
+			<%= link_to user_weights_path(@user), class: "btn btn-block btn-warning" do %>
+			<i class="fa fa-list"></i><br>Weight
+			<% end %>
+		</td>
+		<td>
+			<%= link_to user_allergies_path(@user), class: "btn btn-block btn-success" do %>
+			<span class="glyphicon glyphicon-leaf"></span><br>Allergies
+			<% end %>
+		</td>
+		<td>
+			<%= link_to @user, class: "btn btn-block btn-danger" do %>
+			<span class="glyphicon glyphicon-tree-conifer"></span><br>Family
+			<% end %>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<%= link_to user_albums_path(@user), class: "btn btn-block btn-warning" do %>
+			<span class="glyphicon glyphicon-camera"></span><br>Photos
+			<% end %> 
+		</td>
+		<td>
+			<%= link_to @user, class: "btn btn-block btn-danger" do %>
+			<span class="glyphicon glyphicon-heart"></span><br> Trackers
+			<% end %>
+		</td>
+		<td>
+			<%= link_to @user, class: "btn btn-block btn-primary" do %>
+			<span class="glyphicon glyphicon-comment"></span><br> Messages
+			<% end %>
+		</td>
+		<td>
+			<%= link_to @user, class: "btn btn-block btn-default" do %>
+			<span class="glyphicon glyphicon-globe"></span><br>Everyone
+			<% end %>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<%= link_to user_medications_path(@user), class: "btn btn-block btn-default" do %>
+			<i style="" class="fa fa-medkit "></i><br>Medications
+			<% end %> 
+		</td>
+		<td>
+			<%= link_to user_conditions_path(@user), class: "btn btn-block btn-success" do %>
+			<span class="glyphicon glyphicon-flash"></span><br>Conditions
+			<% end %>
+		</td>
+		<td>
+			<%= link_to user_heights_path(@user), class: "btn btn-block btn-warning" do %>
+			<span class="glyphicon glyphicon-flash"></span><br>Height
+			<% end %>
+		</td>
+		<td>
+			<%= link_to user_episodes_path(@user), class: "btn btn-block btn-primary" do %>
+			<span class="glyphicon glyphicon-book"></span><br>Episodes
+			<% end %>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<%= link_to user_episodes_path(@user), class: "btn btn-block btn-danger" do %>
+			<i style="" class="fa fa-hospital-o"></i><br>Emergency Card
+			<% end %> 
+		</td>
+		
+	</tr>
+</table>
+<h3>Medical</h3>
+<table class="table">
+	<tr>
+		<td>
+			<%= link_to @user, class: "btn btn-block btn-default" do %>
+			<span class="glyphicon glyphicon-user"></span><br>Me
+			<% end %> 
+		</td>
+		<td>
+			<%= link_to user_weights_path(@user), class: "btn btn-block btn-warning" do %>
+			<i class="fa fa-list"></i><br>Weight
+			<% end %>
+		</td>
+		<td>
+			<%= link_to user_allergies_path(@user), class: "btn btn-block btn-success" do %>
+			<span class="glyphicon glyphicon-leaf"></span><br>Allergies
+			<% end %>
+		</td>
+		<td>
+			<%= link_to @user, class: "btn btn-block btn-danger" do %>
+			<span class="glyphicon glyphicon-tree-conifer"></span><br>Family
+			<% end %>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<%= link_to user_albums_path(@user), class: "btn btn-block btn-warning" do %>
+			<span class="glyphicon glyphicon-camera"></span><br>Photos
+			<% end %> 
+		</td>
+		<td>
+			<%= link_to @user, class: "btn btn-block btn-danger" do %>
+			<span class="glyphicon glyphicon-heart"></span><br> Trackers
+			<% end %>
+		</td>
+		<td>
+			<%= link_to @user, class: "btn btn-block btn-primary" do %>
+			<span class="glyphicon glyphicon-comment"></span><br> Messages
+			<% end %>
+		</td>
+		<td>
+			<%= link_to @user, class: "btn btn-block btn-default" do %>
+			<span class="glyphicon glyphicon-globe"></span><br>Everyone
+			<% end %>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<%= link_to user_medications_path(@user), class: "btn btn-block btn-default" do %>
+			<i style="" class="fa fa-medkit "></i><br>Medications
+			<% end %> 
+		</td>
+		<td>
+			<%= link_to user_conditions_path(@user), class: "btn btn-block btn-success" do %>
+			<span class="glyphicon glyphicon-flash"></span><br>Conditions
+			<% end %>
+		</td>
+		<td>
+			<%= link_to user_heights_path(@user), class: "btn btn-block btn-warning" do %>
+			<span class="glyphicon glyphicon-flash"></span><br>Height
+			<% end %>
+		</td>
+		<td>
+			<%= link_to user_episodes_path(@user), class: "btn btn-block btn-primary" do %>
+			<span class="glyphicon glyphicon-book"></span><br>Episodes
+			<% end %>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<%= link_to user_episodes_path(@user), class: "btn btn-block btn-danger" do %>
+			<i style="" class="fa fa-hospital-o"></i><br>Emergency Card
+			<% end %> 
+		</td>
+		
+	</tr>
+</table>
+<h3>Physical</h3>
+<table class="table table-responsive">
+	<tr>
+		<td width: "15%">
+			<%= link_to user_heights_path(@user), class: " btn btn-block btn-default" do %>
+			<span class="glyphicon glyphicon-flash"></span><br>BMI
+			<% end %>
+		</td>
+		<td>
+			<%= link_to user_heights_path(@user), class: "btn btn-block btn-primary" do %>
+			<span class="glyphicon glyphicon-flash"></span><br>Calories
+			<% end %>
+		</td>
+		<td>
+			<%= link_to user_weights_path(@user), class: "btn btn-block btn-success" do %>
+			<i class="fa fa-list"></i><br>Weight
+			<% end %>
+		</td>
+		<td>
+			<%= link_to user_heights_path(@user), class: "btn btn-block btn-warning" do %>
+			<span class="glyphicon glyphicon-flash"></span><br>Height
+			<% end %>
+		</td>
+	</tr>
+</table>

@@ -1,0 +1,31 @@
+<%= form_for [@goal], as: :foo do |f| %>
+<div class="modal-body">
+	<div>
+		<%= f.label :goal_name %><br />
+		<%= f.text_field :name, autofocus: true, class:"form-control" %>
+	</div>
+	<div>
+		<strong>How will you track?</strong><br>
+		<span><%= f.check_box :use_photo %><%= f.label :photos %></span><br>
+		<span><%= f.check_box :use_number %><%= f.label :numbers_and_chart %></span><br>
+		<span><%= f.check_box :use_words %><%= f.label :words %></span>
+	</div>
+	<div>
+		<%= f.label "Number value (lbs, calories, miles, etc)" %><br />
+		<%= f.text_field :number_name, class:"form-control" %>
+	</div>
+	<div>
+		<%= f.label "Number goal" %><br />
+		<%= f.text_field :number_goal, class:"form-control" %>
+	</div>
+	<%= f.hidden_field :completed, :value => false %>
+	<div>
+		<span><%= f.check_box :use_goal_date %><%= f.label :use_goal_date %></span><br>
+		<%= f.date_select :goal_date, class:"form-control" %>
+	</div>
+</div>
+<div class="modal-footer">
+	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	<%= f.submit "Save New Goal", class: "btn btn-primary" %>
+</div>
+<% end %>

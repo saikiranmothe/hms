@@ -1,0 +1,26 @@
+<%= render partial: 'layouts/profile_nav', object: @user %>
+<div class="container">
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<%= link_to "View Full Network", user_network_path(current_user) %>
+		<h2><i class="fa fa-handshake "></i> Modify your Handshake with  <%= @handshake.followed.full_name %></h2>
+		What information is <%= @handshake.followed.full_name %> allowed to see?
+		<hr>
+		<div class="row"><div class="col-md-5 col-md-offset-1">
+			<h4>Basic Health Information</h4>
+			</div><div class="col-md-3"><h5>
+			<%= check_box_tag(:pet_dog) %>
+			<%= label_tag(:pet_dog, "Visible") %>
+			</div>
+		</div><strong>Conditions</strong>
+		<% current_user.conditions.each do |f| %>
+		<div class="row"><div class="col-md-5 col-md-offset-1">
+			<h4><%= f.name %></h4>
+			</div><div class="col-md-4"><h5>
+			<%= check_box_tag(:pet_dog) %>
+			<%= label_tag(:pet_dog, "Visible") %>
+			</div>
+		</div>
+		<% end %>
+	</div>
+</div>

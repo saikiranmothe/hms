@@ -1,0 +1,14 @@
+<%= simple_form_for(@permission) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :user_id %>
+    <%= f.input :permissible_user_id %>
+    <%= f.input :condition_id %>
+    <%= f.input :goal_id %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

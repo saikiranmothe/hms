@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  specialist_id: 1
+  name: MyString
+  notes: MyText
+  start_date: 2014-10-03 18:48:00
+  end_date: 2014-10-03 18:48:00
+  location: MyString
+
+two:
+  user_id: 1
+  specialist_id: 1
+  name: MyString
+  notes: MyText
+  start_date: 2014-10-03 18:48:00
+  end_date: 2014-10-03 18:48:00
+  location: MyString

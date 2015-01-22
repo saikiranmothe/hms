@@ -1,0 +1,47 @@
+<div class="container">
+	<div class="panel panel-default">
+		<div class="panel-body">
+
+<h2>
+<%= @page.name %><%= link_to "Edit",  edit_page_path(@page), class: "btn pull-right " %>
+</h2>
+
+<blockquote><%= @page.description %><footer>Wikipedia</footer></blockquote>
+
+<p>
+<span class="badge"><%= @page.users.count %></span> people are tracking this condition.<br>
+<% @page.users.each do |f| %>
+	<%= link_to f.full_name, f %>
+<% end %>
+</p>
+<p>
+	<%= link_to "Symptoms", @page, class: "btn btn-default btn-sm" %>
+	<%= link_to "Treatments", @page, class: "btn btn-default btn-sm" %>
+	<%= link_to "Tracking	", @page, class: "btn btn-default btn-sm" %>
+</p>
+<p>
+	<% @page.conditions.each do |f| %>
+		<% f.posts.each do |postX| %>
+			<div class="row">
+				<div class="col-sm-1">
+					<% if postX.user.presence %>
+						<%= avatar_profile_link2 postX.user, {height: 35}, class: "img-rounded media-object", style: "padding-left: 10px;" %>
+					<% end %>
+				</div>
+				<div class="col-sm-2">
+					<%= postX.user.full_name %><br>
+					<%= postX.created_at.strftime("%B %d, %Y") %> <br>
+					at <%= postX.created_at.strftime("%I:%M") %> 
+				</div>
+				<div class="col-md-6">
+					
+					<h4><% if postX.title? %><%= postX.title %><br /><% end %>
+					<% if postX.description? %><%= postX.description %><br /><% end %></h4>
+				</div>
+			</div><br>
+			<% end %>
+		<% end %>
+</p>
+<%= link_to "Back", pages_path %>
+
+

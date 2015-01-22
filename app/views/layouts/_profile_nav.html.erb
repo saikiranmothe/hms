@@ -1,0 +1,32 @@
+<div class="container">
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<%= avatar_profile_link @user, {height: 40}, class: "pull-left media-object", style: "margin: 0px;  padding: 0px; padding-right: 10px;" %>
+			<ul class="nav pull-left">
+				<li>
+					<h3 style="margin: 6px;">
+						<%= @user.full_name %>
+					</h3>
+				</li>
+			</ul>
+			
+			<ul class="nav nav-pills pull-right">
+				<li>
+					<%= link_to "Profile", user_path(@user) %>
+				</li>
+				<li>
+					<%= link_to "Network", user_network_path(@user) %>
+				</li>
+				<li>
+					<%= link_to "Data", user_apps_path(@user) %>
+				</li>
+				<li>
+					<%= link_to "Goals", user_goals_path(@user) %>
+				</li>
+				<li>
+					<%= link_to "Conditions", user_conditions_path(@user) %>
+				</li>
+			</ul>
+		</div>
+	</div>	
+</div>

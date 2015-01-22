@@ -1,0 +1,30 @@
+
+<div class="list-group">
+  <%= link_to @user, class: "list-group-item " do %>
+    <h4><i class="fa-fw fa fa-user fa-x"></i> Profile </h4>
+  <% end %>
+  
+  <%= link_to user_allergies_path(@user), class: "list-group-item " do %>
+    <h4><i class="fa-fw fa fa-leaf fa-x"></i> Allergies </h4>
+  <% end %>
+  <%= link_to user_conditions_path(@user), class: "list-group-item " do %>
+    <h4><i class="fa-fw fa fa-stethoscope fa-x"></i> Conditions</h4>
+  <% end %>
+  
+  <%= link_to user_goals_path(@user), class: "list-group-item " do %>
+    <h4><i class="fa-fw fa fa-star fa-x"></i> Goals</h4>
+  <% end %>
+  
+  <%= link_to user_medications_path(@user), class: "list-group-item " do %>
+    <h4><i class="fa-fw fa fa-medkit fa-x"></i> Medications</h4>
+  <% end %>
+  
+  <%= link_to user_heights_path(@user), class: "list-group-item " do %>
+    <h4><i class="fa-fw fa fa-male fa-x"></i> Height &amp; Weight</h4>
+  <% end %>
+  
+  <%= link_to edit_user_registration_path(@user), class: "list-group-item " do %>
+    <h4><i class="fa-fw fa fa-gears fa-x"></i> Settings</h4>
+  <% end %>
+</div>
+

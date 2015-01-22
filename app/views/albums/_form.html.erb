@@ -1,0 +1,15 @@
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+	<h3>New Album</h3>
+</div>
+<div class="modal-body">
+	<%= form_for(Album.new) do |f| %>
+		<div class="">
+			<%= f.text_field :title, class: "form-control" %>
+		</div>
+
+		<div class="form-actions">
+			<%= f.button :submit, class: "btn btn-sm" %>
+		</div>
+	<% end %>
+</div>

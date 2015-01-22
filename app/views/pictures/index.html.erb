@@ -1,0 +1,53 @@
+<%= render partial: 'layouts/profile_nav', object: @user %>
+<div class="container">
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<h2>
+				<%= link_to "File Folders", user_albums_path(@user) %> / <strong><%= @album.title %></strong>
+				<button class="btn btn-default pull-right" data-toggle="modal" data-target="#myModal">
+					<span class="glyphicon glyphicon-picture"></span> Upload File
+				</button>
+			</h2>
+			<hr>
+
+			<!-- Modal -->
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h3 class="modal-title" id="myModalLabel"> <span class="glyphicon glyphicon-picture"></span> Upload File</h3>
+						</div>
+						<%= bootstrap_form_for([@album, Picture.new]) do |f| %>
+						<div class="modal-body">
+
+							<%= f.file_field :asset, as: :file %>
+							<%= f.text_field :caption, input_html: { class: 'input-xxlarge' } %>
+							<%= f.text_field :description, input_html: { class: 'input-xxlarge', rows: 4 } %>
+
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<%= f.submit "Upload File", class: "btn btn-primary" %>
+					</div>
+					<% end %>
+				</div>
+			</div>
+
+
+
+		<% @pictures.each do |picture| %>
+		<div class="col-md-3">
+			<%= link_to image_tag(picture.asset.url(:small)), album_picture_path( @album, picture) %><br />
+			<div class="caption">
+				<% if picture.caption? %><%= picture.caption %><br /><% end %>
+
+				<%= link_to 'View full size', album_picture_path( @album, picture) %>
+
+				<%= link_to "Edit", edit_album_picture_path(@album, picture) %>
+				<%= link_to "Delete", album_picture_path(@album, picture), method: :delete, data: { confirm: "Are you sure?" } %>
+
+			</div>
+		</div>
+		<% end %>

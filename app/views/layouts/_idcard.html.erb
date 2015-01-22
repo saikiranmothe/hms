@@ -1,0 +1,36 @@
+<div class="container">
+	<div class="col-md-8 col-md-offset-2">
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<%= avatar_profile_link @user, {height: 30}, class: "pull-left media-object", style: "margin: 0px; padding: 0px;" %>
+				<h3 style="margin: 2px;">
+					<center>
+						<%= @user.full_name %>
+					</center>
+				</h3>
+			</div>
+			<div class="panel-body">
+				<div class="row text-primary">
+					<div class="col-sm-3">
+						<h3 class=""><strong><%= @user.date_of_birth_age %></strong><small> years old</small></h3>
+					</div>
+					<div class="col-sm-4">
+						<h3 class=""><strong><%= @user.date_of_birth_age %></strong><small> height</small></h3>
+					</div>
+					<div class="col-sm-2">
+						<h3 class=""><strong><%= @user.date_of_birth_age %></strong></h3> <small>weight</small>
+					</div>
+					<div class="col-sm-2">
+						<h3 class=""><strong><%= @user.date_of_birth_age %></strong></h3> <small>blood pressure</small>
+					</div>
+					<div class="col-sm-2">
+						<h3 class=""><strong><%= @user.date_of_birth_age %></strong></h3> <small>t.cholesterol</small>
+					</div>
+					<div class="col-sm-2">
+						<h3 class=""><strong><%= @user.date_of_birth_age %></strong></h3> <small>glucose</small>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

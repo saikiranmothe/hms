@@ -1,0 +1,7 @@
+<div>
+	<p>
+		<h4><%= allergy.name %></h4>
+		<%= link_to "View", user_allergy_path(@user, allergy) %>
+		<%= link_to "Delete", user_allergy_path(@user, allergy), :method => :delete %>
+	</p>
+</div>

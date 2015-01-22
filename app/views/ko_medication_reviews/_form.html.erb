@@ -1,0 +1,16 @@
+<%= simple_form_for(@ko_medication_review) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :title %>
+    <%= f.input :description %>
+    <%= f.input :user_id %>
+    <%= f.input :is_anonymous %>
+    <%= f.input :rating %>
+    <%= f.input :condition_id %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

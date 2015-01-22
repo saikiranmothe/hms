@@ -1,0 +1,126 @@
+<%= render partial: 'layouts/profile_nav', object: @user %>
+<div class="container">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h2>
+				<%= link_to "Conditions", user_conditions_path(@user), class: "" %> / <strong><% if @condition.page.presence %><%= @condition.page.name %><% else %><%= @condition.name %></strong><% end %>
+				<span class="pull-right"><button style="margin-left: 10px;" class="btn btn-default pull-" data-toggle="modal" data-target="#myModal">
+					+ Add Post
+				</button></span>
+				<span class="dropdown pull-right">
+					<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+						Actions
+						<span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu">
+						<li>
+							<%= link_to "Who can see these records?", condition_privacy_path(@condition) %>
+						</li>
+						<li>
+							<%= link_to "Add Doctor", condition_path(@condition) %>
+						</li>
+						<li>
+							<%= link_to "Add Treatment", condition_path(@condition) %>
+						</li>
+						<li><%= link_to "Delete", condition_path(@condition ), method: :delete  %></li>
+					</ul>
+				</span>
+			</h2><% if @condition.page.presence %>
+			<p>
+					<i class="fa fa-globe"></i> <%= link_to @condition.page.name, @condition.page, class: "btn" %> 	| <i class="fa fa-medkit"></i><a style="margin-s: 10px;" class=" pull-" data-toggle="modal" data-target="#newTreatment">
+					Add Treatment<%= link_to "Treatments", condition_trackers_path(@condition) %>
+				</a>
+			</p><% end %>
+			Sort: <%= link_to "All", current_user, class: "btn btn-default" %>
+			 <%= link_to "Patient Notes", current_user, class: "btn btn-default" %>
+			 <%= link_to "Doctor Notes", current_user, class: "btn btn-default" %>
+			 <%= link_to "Test Results", current_user, class: "btn btn-default" %>
+		</div>
+		<div class="panel-body">
+			<!-- Modal Treatment-->
+			<div class="modal fade" id="newTreatment" tabindex="-1" role="dialog" aria-labelledby="myMo	dalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h3 class="modal-title" id="myModalLabel">New Treatment for <%= @condition.name %></h3>
+						</div>  
+						
+						<%= form_for [@condition, Tracker.new], controller: "tracker", url: {user_id: current_user.id, condition_id: @condition.id} do |f| %>
+						<div class="modal-body">	
+							<div>
+								<%= f.hidden_field :user_id %>
+								<%= f.hidden_field :condition_id %>
+								<%= f.collection_select( :medication_id, @user.medications.all, :id, :name, include_blank: "None") %>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							<%= f.submit "Save New Treatment", class: "btn btn-primary" %>
+						</div>
+						<% end %>
+					</div>
+				</div>
+			</div>
+			<!-- Modal -->
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myMo	dalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h3 class="modal-title" id="myModalLabel">New Information about <%= @condition.name %></h3>
+						</div>  
+						
+						<%= form_for [@condition, Post.new], url: {user_id: current_user.id} do |f| %>
+						<div class="modal-body">	
+							<div>
+								<%= f.hidden_field :user_id %>
+								<%= f.label :information %><br />
+								<%= f.text_area :description, class:"form-control" %>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							<%= f.submit "Save New Post", class: "btn btn-primary" %>
+						</div>
+						<% end %>
+					</div>
+				</div>
+			</div>
+
+			<% @posts.each do |post| %>
+			<div class="row">
+				<div class="col-sm-1">
+					<% if @user.presence %><%= avatar_profile_link2 @user, {height: 35}, class: "img-rounded media-object", style: "text-align: center; margin: 0px;  padding: 0px; padding-right: 10px;" %>
+				</div>
+				<div class="col-sm-2">
+					Posted by <%= @user.full_name %><% end %> <br>
+					<%= post.created_at.strftime("%B %d, %Y") %> <br>
+					at <%= post.created_at.strftime("%I:%M") %>
+				</div>
+				<div class="col-md-6">
+					
+					<h4><% if post.title? %><%= post.title %><br /><% end %>
+					<% if post.description? %><%= post.description %><br /><% end %></h4>
+				
+					<%= link_to "Edit", condition_post_path(@condition, post), method: :edit %> | 
+					<%= link_to "Delete", condition_post_path(@condition, post), method: :delete, data: { confirm: "Are you sure?" } %>
+				</div>
+			</div>
+			<hr>
+			<% end %>
+    </div>
+  </div>
+<div class="panel panel-default">
+		<div class="panel-heading">
+      <h2>Who can see these records?</h2>
+      <hr>
+      <% @user.permissions.each do |f| %>
+      <h4>
+        <% if f.condition_id == @condition.id %>
+        <%= f.permissible_user.full_name %>
+        <% end %>
+      </h4>
+      <% end %>
+  </div>
+  </div>

@@ -1,0 +1,59 @@
+<%= render partial: 'layouts/profile_nav', object: @user %>
+<div class="container">
+
+	<% if @goals.any? %>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h2>Results in Goals</h2>
+		</div>
+		<div class="panel-body">
+			<% for goal in @goals %>
+			<div class="col-sm-4 -default" style="margin: 0px;">
+				<h3><center>
+					<br><strong><%= link_to goal.name, goal %><br>
+				</center>
+			</h3>
+
+			</div>
+			<% end %>
+		</div>
+	</div>
+	<% end %>
+	
+	<% if @conditions.any? %>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h2>Results in Conditions</h2>
+		</div>
+		<div class="panel-body">
+			<% for goal in @conditions %>
+			<div class="col-sm-4 -default" style="margin: 0px;">
+				<h3><center>
+					<strong><%= link_to goal.name, goal %><br>
+				</center>
+			</h3>
+			
+			</div>
+			<% end %>
+		</div>
+	</div>
+	<% end %>
+
+	<% if @medications.any? %>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h2>Results in Medications</h2>
+		</div>
+		<div class="panel-body">
+			<% for goal in @medications %>
+			<div class="col-sm-4 -default" style="margin: 0px;">
+				<h3><center>
+					<strong><%= link_to goal.name, user_medications_path(goal) %><br>
+				</center>
+			</h3>
+			
+			</div>
+			<% end %>
+		</div>
+	</div>
+	<% end %>

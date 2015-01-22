@@ -1,0 +1,18 @@
+<div class="container">
+	<div class="panel panel-default">
+		<div class="panel-body">
+      <%= image_tag @ko_medication.imageurl, width: 100 %>
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @ko_medication.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @ko_medication.description %>
+</p>
+
+<%= link_to 'Edit', edit_ko_medication_path(@ko_medication) %> |
+<%= link_to 'Back', ko_medications_path %>

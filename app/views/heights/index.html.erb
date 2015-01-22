@@ -1,0 +1,31 @@
+
+<div class="container">
+	<h2><strong>Height</strong> - <%= link_to @user.full_name, @user %></h2>
+	<hr>
+<%= line_chart Height.group(:created_at).maximum(:amount) %>
+
+<%= form_for Height.new do |f| %>
+
+  <p>
+    <%= f.label :amount %><br />
+    <%= f.text_field :amount %>
+  </p>
+  <p><%= f.submit class: "btn btn-default" %></p>
+<% end %>
+	<table class="table table-bordered">
+		<tr>
+			<th>amount</th>
+			<th>Date</th>
+		</tr>
+		<% for height in @heights %>
+		<tr>
+			<td><%= height.amount %></td>
+			<td><%= height.created_at %></td>
+			<td><%= link_to "Show", height %></td>
+			<td><%= link_to "Edit", edit_height_path(height) %></td>
+			<td><%= link_to "Destroy", height, :confirm => 'Are you sure?', :method => :delete %></td>
+		</tr>
+		<% end %>
+	</table>
+</div>
+</div>

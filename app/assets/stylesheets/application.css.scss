@@ -1,0 +1,25 @@
+/*
+ * This is a manifest file that'll automatically include all the stylesheets available in this directory
+ * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
+ * the top of the compiled file, but it's generally better to create a new file per style scope.
+ *= require_self
+ * require custom_bootstrap/custom_bootstrap
+ * require custom_bootstrap/mixins
+ * require custom_bootstrap/variables
+ *= require font-awesome
+ *= require rails_bootstrap_forms
+*/
+@import "bootswatch/readable/variables";
+@import "bootstrap";
+@import "bootswatch/readable/bootswatch";
+@import url(http://fonts.googleapis.com/css?family=Varela+Round);
+body {
+  font-family: 'Varela Round', sans-serif;
+	padding-top: 80px;
+
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  font-family: 'Varela Round', sans-serif;
+}
+

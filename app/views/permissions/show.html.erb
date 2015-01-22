@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @permission.user_id %>
+</p>
+
+<p>
+  <strong>Permissible user:</strong>
+  <%= @permission.permissible_user_id %>
+</p>
+
+<p>
+  <strong>Condition:</strong>
+  <%= @permission.condition_id %>
+</p>
+
+<p>
+  <strong>Goal:</strong>
+  <%= @permission.goal_id %>
+</p>
+
+<%= link_to 'Edit', edit_permission_path(@permission) %> |
+<%= link_to 'Back', permissions_path %>

@@ -1,0 +1,67 @@
+<div class="container">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <ul class="nav navbar-nav nav-">
+        <li class="pill">
+          <%= link_to users_path, class: "pill pill-justified" do %><i class="fa fa-users"></i>  Community <% end %>
+        </li>
+        <li>
+          <%= link_to "Conditions", users_path, class: "" %>
+        </li>
+        <li>
+          <%= link_to "Medication Reviews", users_path, class: "" %>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="panel panel-default">
+    <div class="panel-body">
+  <h1>Looking for someone?</h1>
+  <hr>
+  <p><i class="fa fa-lock"></i> <strong>Please note, PHR SYSTEM will never share your information with anyone. </strong>If you want another user to see any part of your information, you must connect with them directly and explicitly choose what information is shared with that person. 
+  </p>
+
+  <% @users.each do |user| %>
+     <h4 class="media-heading">
+      <% if user.avatar.presence  %>
+      <%= avatar_profile_link user, {height: 70}, style: "margin: 0px; padding: 0px; padding-right: 14px;", class: "pull-left media-object" %>
+      <% else %>
+
+      <% end %><Strong><%= link_to user.full_name, user %></strong>
+    </h4>
+          <%= link_to "Profile", user, class: "btn btn-sm btn-default" %> 
+          <% if current_user.following?(user) %>
+           <%= link_to "Edit Handshake", current_user.find_handshake(user), class: "btn btn-sm btn-primary" %>
+          <% else %>
+          <a class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal<%= user.id %>"><i class="fa fa-hand"></i>Handshake</a>
+          <% end %>
+
+  <hr>
+
+  <div class="modal fade" id="myModal<%= user.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h3 class="modal-title" id="myModalLabel">Handshake</h3>
+        </div>
+        <div class="modal-body">
+          <h4>How do you know <%= user.full_name %>?
+          <% unless current_user?(user) %>
+            <%= form_for(current_user.handshakes.build(followed_id: user.id)) do |f| %>
+              <%= f.hidden_field :followed_id %>
+              <%= f.select :relationship_type, relationship_type: [:Family, :Doctor, :Friend] %>
+              <%= f.submit "Handshake", class: "btn btn-primary" %>
+            <% end %>
+          <% end %>
+        </h4>
+          <h5>Please note, your information will still be private to <%= user.full_name%>. You can choose what information <%= user.full_name %> can see after connecting with them. </h5>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  <% end %>
+ 
+</div>

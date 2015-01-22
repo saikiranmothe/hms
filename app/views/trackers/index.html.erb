@@ -1,0 +1,18 @@
+<%= render partial: 'layouts/profile_nav', object: @user %>
+<div class="container">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h2><%= link_to "Conditions", user_conditions_path(@user), class: "" %> / <strong><% if @condition.page.presence %><%= @condition.page.name %><% else %><%= @condition.name %></strong><% end %></h2>
+			</div>	
+		<div class="panel-body">
+			<% @condition.trackers.each do |f| %>
+				<%= link_to f.medication.name, f %>
+			<% end %>
+			<%= form_for [@condition, Tracker.new], controller: "tracker", url: {user_id: current_user.id, condition_id: @condition.id} do |f| %>	
+				<%= f.hidden_field :user_id %>
+				<%= f.hidden_field :condition_id %>
+				<%= f.collection_select( :medication_id, @user.medications.all, :id, :name, include_blank: "None") %>
+				<%= f.submit "Save New Treatment", class: "btn btn-primary" %>
+			<% end %>
+		</div>
+	</div>
