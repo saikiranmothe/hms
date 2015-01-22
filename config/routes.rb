@@ -8,8 +8,8 @@ Tabby::Application.routes.draw do
 
   resources :ko_medications
 
-  #devise_for :admin_users, ActiveAdmin::Devise.config
-  #ActiveAdmin.routes(self)
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
   
   as :user do
     get '/register', to: 'devise/registrations#new', as: :register
