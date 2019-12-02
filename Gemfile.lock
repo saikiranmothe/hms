@@ -78,7 +78,7 @@ GEM
       thor
     builder (3.2.2)
     cancan (1.6.10)
-    chartkick (1.2.4)
+    chartkick (3.3.0)
     choice (0.1.7)
     climate_control (0.0.3)
       activesupport (>= 3.0)
