@@ -31,7 +31,7 @@ gem 'groupdate'
 gem 'birthday'
 gem 'acts_as_commentable'
 gem 'activeadmin', github: 'gregbell/active_admin'
-gem 'nokogiri', '~> 1.6.1'
+gem 'nokogiri', '~> 1.11.4'
 # Use sqlite3 as the database for Active Record
 group :test do
 	gem 'sqlite3'
